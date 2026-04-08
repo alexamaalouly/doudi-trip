@@ -131,7 +131,27 @@ footer{text-align:center;padding:20px;font-size:10px;letter-spacing:4px;text-tra
 
   <div class="panel on" id="p0">
     <div class="ph"><div class="pnum">9</div><div class="pinfo"><div class="ptitle">Arrivee &amp; Premiere nuit magique</div><div class="pdate">Jeudi 9 Avril</div></div></div>
-    <div class="fnote">&#x1F504; Jungle Park &amp; Whale Watching interchangeables jeudi / samedi.</div>
+    <div class="fnote">&#x1F504; <strong>Option après-midi :</strong> choisis entre Jungle Park et Masca — et si la météo est mauvaise samedi, le Whale Watching peut aussi passer au jeudi à la place.</div>
+
+    <div style="display:flex;gap:10px;margin-bottom:20px;">
+      <button onclick="chooseAfternoon('jungle')" id="btn-jungle"
+        style="flex:1;padding:12px 8px;border-radius:2px;border:2px solid var(--green);background:var(--green);color:#fff;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;">
+        🦁 Jungle Park
+      </button>
+      <button onclick="chooseAfternoon('masca')" id="btn-masca"
+        style="flex:1;padding:12px 8px;border-radius:2px;border:2px solid var(--stone-dk);background:#fff;color:var(--cxl);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;">
+        🏔 Masca
+      </button>
+    </div>
+
+    <div id="opt-jungle">
+      <div class="act"><div class="atime">~13h</div><div class="aline s"></div><div class="abody"><div class="aname">🦁 Jungle Park</div><div class="anote">Parc naturel &middot; Fermeture 17h30 &middot; Prevoir debut apres-midi</div><div class="tags"><span class="tag tt">A reserver</span><span class="tag tf">Interchangeable sam. si mauvais temps</span></div><div class="adocs" id="docs-jungle"></div></div></div>
+    </div>
+
+    <div id="opt-masca" style="display:none;">
+      <div class="act"><div class="atime">~13h</div><div class="aline s"></div><div class="abody"><div class="aname">🏔 Masca — Village volcanique</div><div class="anote">~45 min depuis l'hotel &middot; Route TF-436 spectaculaire<br>Village perche sur une crete dans un ravin &middot; Vues sur les falaises de Los Gigantes<br>Retour vers 17h pour le diner avant le stargazing</div><div class="tags"><span class="tag tb">Optionnel</span><span class="tag tf">Interchangeable sam. si mauvais temps</span></div><div class="adocs" id="docs-masca"></div></div></div>
+    </div>
+
     <div class="act"><div class="atime">09h35</div><div class="aline g"></div><div class="abody"><div class="aname">✈️ Atterrissage TFS</div><div class="anote">Paris Orly 06h15 &rarr; 09h35 &middot; Resa OIJ97H</div><div class="tags"><span class="tag tb">TO4730 Confirme</span></div><div class="adocs" id="docs-a1"></div></div></div>
     <div class="act"><div class="atime">10h30</div><div class="aline o"></div><div class="abody"><div class="aname">🚗 Recuperation voiture Avis</div><div class="anote">Bus Stop <b>E06/E07 Color Blue</b> &middot; Sortie bagages &rarr; gauche 400m &middot; Navette gratuite<br>Resa <b>10150223FR6</b> &middot; &#128222; 928 092 330</div><div class="tags"><span class="tag tb">Confirme 10h30</span></div><div class="adocs" id="docs-a2"></div></div></div>
     <div class="act"><div class="atime">~11h30</div><div class="aline s"></div><div class="abody"><div class="aname">🌿 Check-in Estefania Boutique Suites</div><div class="anote">Calle Llano del Grillo 2, Chayofa &middot; Resa <b>4484081</b> &middot; &#128222; +34 822 14 80 75</div><div class="tags"><span class="tag tb">Confirme 3 nuits</span></div><div class="adocs" id="docs-a3"></div></div></div>
@@ -198,6 +218,21 @@ footer{text-align:center;padding:20px;font-size:10px;letter-spacing:4px;text-tra
 <footer>Tenerife &middot; Abril 2026 &middot; Con amor 🌋</footer>
 
 <script>
+// Afternoon toggle
+function chooseAfternoon(choice) {
+  var isJungle = choice === 'jungle';
+  document.getElementById('opt-jungle').style.display = isJungle ? 'block' : 'none';
+  document.getElementById('opt-masca').style.display = isJungle ? 'none' : 'block';
+  var btnJ = document.getElementById('btn-jungle');
+  var btnM = document.getElementById('btn-masca');
+  btnJ.style.background = isJungle ? 'var(--green)' : '#fff';
+  btnJ.style.color = isJungle ? '#fff' : 'var(--cxl)';
+  btnJ.style.borderColor = isJungle ? 'var(--green)' : 'var(--stone-dk)';
+  btnM.style.background = isJungle ? '#fff' : 'var(--green)';
+  btnM.style.color = isJungle ? 'var(--cxl)' : '#fff';
+  btnM.style.borderColor = isJungle ? 'var(--stone-dk)' : 'var(--green)';
+}
+
 // Progress bar
 window.addEventListener('scroll',function(){
   var d=document.documentElement;
